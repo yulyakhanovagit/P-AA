@@ -11,7 +11,9 @@ class Matrix
         int m;
         int squares;
 
-        void Create(){
+
+    public:
+        Matrix(int i): m(i), squares(3){
             Matr = new int*[m];
             for (int i = 0; i < m; i++)
                 Matr[i] = new int[m];
@@ -20,11 +22,6 @@ class Matrix
                     Matr[i][j] = 0;
                 }
              }
-        }
-
-    public:
-        Matrix(int i): m(i), squares(3){
-            Create();
         }
 
          Matrix(const Matrix& N){
