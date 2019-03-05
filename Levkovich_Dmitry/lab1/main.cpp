@@ -7,9 +7,8 @@ using namespace std;
 
 class Square{
 public:
-    Square(int N):arr(N, vector<int>(N, 0)), best(15, vector<int>(3, 0)), q(N, vector<int>(N, 0))
+    Square(int N):arr(N, vector<int>(N, 0)), best(15, vector<int>(3, 0))
     {
-
         size = N;
         bestcolor = 16;
         color = 4;
@@ -20,7 +19,6 @@ public:
     }
 
     void solve(){
-
         if(size%2 == 0){
             PutSquare(0, 0, size/2, 1, size/2);
             PutSquare(0, size/2,size/2, 2,size/2);
@@ -42,14 +40,11 @@ public:
             BackTracking(3*size/5, 2*size/5, 2*size/5);
             ans();
         }
-
         else{
-            color++;
             PutSquare(0,0,size/2+1,1,size-(size/2+1));
             PutSquare(size/2+1,0,size/2,2,size-(size/2+1));
             PutSquare(0,size/2+1,size/2,3,size-(size/2+1));
-            PutSquare(size/2+1, size/2,1, 4, size-(size/2+1));
-            BackTracking(size/2+2, size/2, size-(size/2+1));
+            BackTracking(size/2+1, size/2, size-(size/2+1));
             ans();
         }
     }
@@ -62,6 +57,7 @@ private:
     int color;
     int count;
     vector<vector<int>> q;
+
     void RemoveSqr(int N, int color){
         for(auto i = N; i<size;i++)
             for(auto j = N; j < size; j++){
@@ -126,7 +122,6 @@ private:
             print(bestcolor);
         }
     }
-
 
     int findSquare(int & x, int & y,int K){
         while (arr[y][x] != K){
