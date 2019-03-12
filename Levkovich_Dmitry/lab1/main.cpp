@@ -125,12 +125,8 @@ public:
                 return 0;
         }
         int i = 0;
-        while (arr[y][x+i] == K){
-            if ((x+i) < size)
-            {
-                ++i;
-            }
-            else return --i;
+        while (!isOutOfBounds(x, y, i) && arr[y][x+i] == K){
+                i++;
         }
         return i;
     }
