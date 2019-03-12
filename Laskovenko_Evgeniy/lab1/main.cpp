@@ -222,8 +222,8 @@ public:
     {
         for(unsigned i=0; i<size; ++i)
         {
-            delete arr[i];
-            delete framing_arr[i];
+            delete[] arr[i];
+            delete[] framing_arr[i];
         }
         delete[] arr;
         delete[] framing_arr;
