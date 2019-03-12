@@ -34,19 +34,23 @@ public:
 
     }
 
-    bool findEmptySquare(int & x, int & y, int N){
-        for (x = N;x<size;x++) {
-            for (y = N;y<size;y++) {
-                if(arr[y][x]==0)
-                    return true;
+    bool findEmptySquare(int & x, int & y){
+            while(arr[y][x]!=0){
+            if(x==size-1){
+                x = 0;
+                y++;
             }
+            else
+                x++;
+            if(x>=size || y>=size)
+                return false;
         }
-        return false;
+        return true;
     }
 
     bool isOutOfBounds(int x, int y, int width)
     {
-        if(width +x > size || width +y > size)
+        if(width > size-x || width > size-y)
             return true;
         else
             return  false;
@@ -82,12 +86,12 @@ public:
             {
 
                 color++;
+                int next_x = x;
+                int next_y = y;
 
-                int x_ = x;
-                int y_ = y;
-                if(findEmptySquare(x_, y_, N)){
+                if(findEmptySquare(next_x, next_y)){
 
-                    BackTracking(x_, y_, N);
+                    BackTracking(next_x, next_y, N);
 
                 }
                 else
@@ -180,6 +184,7 @@ public:
         }
 
         else{
+
             PutSquare(0,0,size/2+1,1,size-(size/2+1));
             PutSquare(size/2+1,0,size/2,2,size-(size/2+1));
             PutSquare(0,size/2+1,size/2,3,size-(size/2+1));
@@ -207,5 +212,6 @@ int main()
     cin>>N;
     Square a(N);
     a.solve();
+    //a.write();
     return 0;
 }
