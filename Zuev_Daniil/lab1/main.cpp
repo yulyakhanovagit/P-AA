@@ -42,6 +42,8 @@ public:
         }
     }
     ~square(){
+        for(int i = 1;i<size;i++)
+            delete [] is_empty[i];
         delete [] is_empty;
         delete [] min;
         delete [] current;
