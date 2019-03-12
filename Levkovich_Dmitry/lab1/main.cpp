@@ -180,7 +180,6 @@ public:
         }
 
         else{
-            color++;
             PutSquare(0,0,size/2+1,1,size-(size/2+1));
             PutSquare(size/2+1,0,size/2,2,size-(size/2+1));
             PutSquare(0,size/2+1,size/2,3,size-(size/2+1));
