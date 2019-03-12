@@ -8,6 +8,7 @@ struct Point
     unsigned j;
 };
 
+#pragma pack (4)
 class Square
 {
 private:
@@ -224,10 +225,11 @@ public:
             delete arr[i];
             delete framing_arr[i];
         }
+        delete[] arr;
+        delete[] framing_arr;
         size = 0;
     }
 };
-
 
 int main()
 {
