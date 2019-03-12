@@ -1,5 +1,4 @@
 #include <iostream>
-#include <iomanip>
 
 using namespace std;
 
@@ -220,12 +219,12 @@ public:
 
     ~Square()
     {
-        size = 0;
         for(unsigned i=0; i<size; ++i)
         {
             delete arr[i];
             delete framing_arr[i];
         }
+        size = 0;
     }
 };
 
