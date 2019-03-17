@@ -7,8 +7,9 @@ using namespace std;
 
 class Square{
 public:
-    Square(int N):arr(N, vector<int>(N, 0)), best(15, vector<int>(3, 0))
+    Square(int N):arr(N, vector<int>(N, 0))
     {
+
         size = N;
         bestcolor = 16;
         color = 4;
@@ -17,14 +18,7 @@ public:
     ~Square(){
 
     }
-    void write(){
-        for(int i = 0;i<size;i++){
-            for(int j = 0;j<size;j++)
-                cout<<best[i][j]<<" ";
-            cout<<endl;
-        }
 
-    }
     void RemoveSqr(int N, int color){
         for(auto i = N; i<size;i++)
             for(auto j = N; j < size; j++){
@@ -50,7 +44,7 @@ public:
 
     bool isOutOfBounds(int x, int y, int width)
     {
-        if(width > size-x || width > size-y)
+        if(width +x > size || width + y > size)
             return true;
         else
             return  false;
@@ -100,9 +94,8 @@ public:
 
                     color--;
                     if(color < bestcolor){
-
                         bestcolor = color;
-                        print(bestcolor);
+                        print();
                     }
                     RemoveSqr(N, color);
                     return;
@@ -113,37 +106,35 @@ public:
         }
     }
 
-    int findSquare(int & x, int & y,int K){
-        while (arr[y][x] != K){
-            if (x == size-1){
-                x = 0;
-                ++y;
+    int widht(int c){
+        int w = 0;
+        for(int i = 0;i<size;i++){
+            for(int j = 0;j<size;j++)
+                if(arr[i][j]==c)
+                    w++;
+        }
+        return w;
+    }
+    void find(int & x, int & y, int k){
+        for (y = 0;y<this->size;y++) {
+            for (x = 0;x<this->size;x++) {
+                   if(arr[y][x]==k){
+                       return;
+                   }
             }
-            else
-                ++x;
-            if (x>=size || y>=size)
-                return 0;
-        }
-        int i = 0;
-        while (!isOutOfBounds(x, y, i) && arr[y][x+i] == K){
-                i++;
-        }
-        return i;
-    }
-
-    void print(int color){
-        int x, y, size;
-        for(int k = 1; k <= color; ++k)
-        {
-            x = 0;
-            y = 0;
-            size = findSquare(x, y, k);
-            best[k-1][0] = x + 1;
-            best[k-1][1] = y + 1;
-            best[k-1][2] = size;
         }
     }
 
+    void print(){
+        int x_, y_;
+        c.clear();
+        for (int i = 1;i<=bestcolor;i++) {
+           x_ = 0;
+           y_ = 0;
+           find(x_, y_, i);
+           c.push_back({x_+1, y_+1, sqrt(widht(i))});
+        }
+    }
     void solve(){
 
         if(size%2 == 0){
@@ -153,7 +144,7 @@ public:
             BackTracking( size/2, size/2, size-size/2);
             cout << bestcolor << endl;
             for(int i = 0;i<bestcolor;i++){
-                cout<<best[i][0]<<" "<<best[i][1]<<" "<<best[i][2]<<endl;
+                cout<<c[i].x<<" "<<c[i].y<<" "<<c[i].w<<endl;
             }
         }
         else if(size%3 == 0){
@@ -163,8 +154,9 @@ public:
             BackTracking( 2*size/3, size/3, size/3);
             cout << bestcolor << endl;
             for(int i = 0;i<bestcolor;i++){
-                cout<<best[i][0]<<" "<<best[i][1]<<" "<<best[i][2]<<endl;
+                cout<<c[i].x<<" "<<c[i].y<<" "<<c[i].w<<endl;
             }
+
         }
         else if(size%5 == 0){
 
@@ -175,8 +167,9 @@ public:
             BackTracking(3*size/5, 2*size/5, 2*size/5);
             cout << bestcolor << endl;
             for(int i = 0;i<bestcolor;i++){
-                cout<<best[i][0]<<" "<<best[i][1]<<" "<<best[i][2]<<endl;
+                cout<<c[i].x<<" "<<c[i].y<<" "<<c[i].w<<endl;
             }
+
         }
 
         else{
@@ -187,14 +180,18 @@ public:
             BackTracking(size/2+1, size/2, size-(size/2+1));
             cout << bestcolor << endl;
             for(int i = 0;i<bestcolor;i++){
-                cout<<best[i][0]<<" "<<best[i][1]<<" "<<best[i][2]<<endl;
+                cout<<c[i].x<<" "<<c[i].y<<" "<<c[i].w<<endl;
             }
 
         }
     }
-
+    struct coord{
+        int x;
+        int y;
+        int w;
+    };
 private:
-    vector<vector<int>> best;
+    vector<coord> c;
     vector<vector<int>> arr;
     int size;
     int bestcolor;
