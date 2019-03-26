@@ -1,4 +1,4 @@
-include <iostream>
+#include <iostream>
 #include <vector>
 #include <algorithm>
 #include <iterator>
@@ -97,6 +97,9 @@ std::string Astar(Node* start, Node* finish){
         tmp = tmp->parent;
     }
     delete tmp;
+    for (auto nd : str){
+        delete nd;
+    }
     return ans;
 }
 
@@ -136,6 +139,11 @@ int main()
     ans = Astar(list[it1], list[it2]);
     std::reverse(ans.begin(), ans.end());
     std::cout<<ans<<std::endl;
+    for (auto nd : list){
+        delete nd;
+    }
+    list.clear();
+    ans.clear();
     return 0;
 
 }
