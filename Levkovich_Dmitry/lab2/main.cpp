@@ -28,22 +28,6 @@ public:
     Graph(){
         size = 26;
     }
-    void Init(){
-        type vertex1, vertex2;
-        cin>>start>>finish;
-        bool t = true;
-
-        while(t){
-            if(cin>>vertex1 && isalpha(vertex1)){
-                cin>>vertex2>>weight;
-                m[vertex1-'a'][vertex2-'a'] = weight;
-            }
-            else {
-                t = false;
-            }
-        }
-    }
-
     bool find(vector<type> t, type c){
         if(t.size()==0){
             return false;
@@ -170,7 +154,7 @@ public:
                     }
                 }
             sol--;
-            std::sort(solution.begin(), solution.end(), [](const A& a, const A& b) {//ñîðòèðîâêà ïî óáûâàíèþ
+            std::sort(solution.begin(), solution.end(), [](const A& a, const A& b) {//Ã±Ã®Ã°Ã²Ã¨Ã°Ã®Ã¢ÃªÃ  Ã¯Ã® Ã³Ã¡Ã»Ã¢Ã Ã­Ã¨Ã¾
                       return (a.weight+a.prior) > (b.weight+b.prior);});
 
             if(finish != nullptr)
