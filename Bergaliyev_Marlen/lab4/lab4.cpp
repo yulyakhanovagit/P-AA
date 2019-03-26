@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstdio>
 #include <vector>
 
 std::vector<int> pref_func(std::string const & str){
@@ -18,23 +19,25 @@ std::vector<int> pref_func(std::string const & str){
 	return pi;
 }
 	
-std::string cmp(std::string const & p, std::string const & t){
+std::string cmp(std::string const & p){
 	int n = p.length();
 	std::string ans;
 	std::vector<int> pi = pref_func(p);
 	int j = 0;
-	int t_len = t.length();
-	for(int i=0; i<t_len; ++i){
-		while(p[j] != t[i] && j > 0){
+	int i = 0;
+	char t;
+	while(std::cin.get(t)){
+		while(j == n || (p[j] != t && j > 0)){
 			j = pi[j-1];
 		}
-		if(p[j] == t[i]){
+		if(p[j] == t){
 			j += 1;
 		}
 		if(j == n){
 			ans += std::to_string(i-n+1);
 			ans.push_back(',');
 		}
+		++i;
 	}
 	if(ans == "")
 		return "-1";
@@ -74,8 +77,7 @@ int find_cycle(std::string a, std::string b){
 int main(){
 	std::string p, t;
 	std::getline(std::cin, p);
-	std::getline(std::cin, t);
-	auto ans = cmp(p, t);
+	auto ans = cmp(p);
 	std::cout << ans << std::endl;
 	return 0;
 }
