@@ -94,6 +94,7 @@ public:
         for(int i = 0;i<edge.size();i++){
             m[find_index(a, edge[i].a)][find_index(a, edge[i].b)] = edge[i].weight;
         }
+        A_Star(a);
         GreedIsGood(a);
     }
 
