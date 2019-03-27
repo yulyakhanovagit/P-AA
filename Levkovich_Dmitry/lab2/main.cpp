@@ -219,5 +219,5 @@ int main()
 {
     Graph<double, char> s;
     s.new_Init();
-    return 0;s
+    return 0;
 }
