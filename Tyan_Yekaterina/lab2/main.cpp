@@ -34,9 +34,6 @@ public:
                     elem.key=evristic(i,way)+elem.dif;
                     for(auto j:str1)
                         elem.str.push_back(j);
-                    for(auto j:elem.str)
-                        cout<<j;
-                    cout<<endl;
                     elem.str.push_back(get<1>(edge[i]));
                     queue1.push(elem);
                 }
