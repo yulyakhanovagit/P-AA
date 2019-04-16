@@ -22,7 +22,7 @@ public:
 
   ~Square()
   {
-  	delete arr;
+                delete[] arr;
   }
 
   void Insert(int x, int y, int k)
@@ -48,9 +48,7 @@ public:
 
   bool Check_this_position(int x, int y, int k)
     {
-      if ((k > this->k - x)
-        ||
-        (k > this->k - y)) return false;
+      if ((k > this->k - x)  || (k > this->k - y)) return false;
 
       for (int i = 0; i < k; i++)
         for (int j = 0; j < k; j++)
